@@ -10,7 +10,7 @@ import {
   FormButton,
 } from "@/styles/formsSelectionStyles";
 import { useRouter } from "next/router";
-import LoadingSpinner from "@/components/LoadingSpinner";
+import LoadingSpinner from "@/components/loading/LoadingSpinner";
 
 export default function Forms() {
   const router = useRouter();
