@@ -1,3 +1,22 @@
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import { LoadingSpinner } from "@/components/loading/LoadingSpinner";
+
 export default function Home() {
-  return <h1>Multi Step Form Project</h1>;
+  const router = useRouter();
+  const [isLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      router.push("/forms");
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, [router]);
+
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
+
+  return null;
 }
