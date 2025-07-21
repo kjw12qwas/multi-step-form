@@ -10,10 +10,17 @@ export default function QuoteStep() {
 
   return (
     <FormContainer>
-      <h1>Quote Step</h1>
+      <h1 aria-label="Quote Step Title">Quote Step</h1>
       <FormButtonContainer>
-        <FormConfirmButton onClick={handlePrev}>이전</FormConfirmButton>
-        <FormConfirmButton onClick={handleNext}>다음</FormConfirmButton>
+        <FormConfirmButton
+          onClick={handlePrev}
+          aria-label="Previous Step Button"
+        >
+          이전
+        </FormConfirmButton>
+        <FormConfirmButton onClick={handleNext} aria-label="Next Step Button">
+          다음
+        </FormConfirmButton>
       </FormButtonContainer>
     </FormContainer>
   );

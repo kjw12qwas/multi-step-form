@@ -12,18 +12,19 @@ import {
 import { useRouter } from "next/router";
 import LoadingSpinner from "@/components/loading/LoadingSpinner";
 
+// 첫 진행 화면이며 저장된 데이터가 있을 경우 이어서 하기 버튼을 클릭하면 저장된 데이터를 불러오고 없을 경우 시작하기 버튼을 클릭하면 첫 진행 화면으로 이동합니다.
 export default function Forms() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleStartForm = async () => {
+  const handleStartForm = () => {
     setIsLoading(true);
-    await router.push("/forms/1");
+    router.push("/forms/1");
   };
 
-  const handleContinueForm = async () => {
+  const handleContinueForm = () => {
     setIsLoading(true);
-    await router.push("/forms/1");
+    router.push("/forms/1");
   };
 
   if (isLoading) {

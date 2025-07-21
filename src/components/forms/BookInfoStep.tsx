@@ -6,9 +6,11 @@ export default function BookInfoStep() {
 
   return (
     <FormContainer>
-      <h1>Book Info</h1>
+      <h1 aria-label="Book Info Step Title">Book Info</h1>
       {isFirstStep && (
-        <FormConfirmButton onClick={handleNext}>Next</FormConfirmButton>
+        <FormConfirmButton onClick={handleNext} aria-label="Next Step Button">
+          Next
+        </FormConfirmButton>
       )}
     </FormContainer>
   );

@@ -10,10 +10,19 @@ export default function VisibilityStep() {
 
   return (
     <FormContainer>
-      <h1>Visibility Step</h1>
+      <h1 aria-label="Visibility Step Title">Visibility Step</h1>
       <FormButtonContainer>
-        <FormConfirmButton onClick={handlePrev}>이전</FormConfirmButton>
-        {isLastStep && <FormConfirmButton>완료</FormConfirmButton>}
+        <FormConfirmButton
+          onClick={handlePrev}
+          aria-label="Previous Step Button"
+        >
+          이전
+        </FormConfirmButton>
+        {isLastStep && (
+          <FormConfirmButton aria-label="Complete Step Button">
+            완료
+          </FormConfirmButton>
+        )}
       </FormButtonContainer>
     </FormContainer>
   );

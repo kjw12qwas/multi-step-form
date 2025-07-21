@@ -6,6 +6,7 @@ import {
   HomeButton,
 } from "@/styles/notFoundStyles";
 
+// 사용자가 없는 페이지 또는 에러가 발생 했을 때 대응 하기 위한 page 입니다.
 export default function NotFound() {
   return (
     <NotFoundContainer>
