@@ -1,9 +1,9 @@
-import BookInfoStep from "@/components/forms/BookInfoStep";
-import QuoteStep from "@/components/forms/QuoteStep";
-import RatingStep from "@/components/forms/RatingStep";
-import ReviewStep from "@/components/forms/ReviewStep";
-import VisibilityStep from "@/components/forms/VisibilityStep";
 import NotFound from "@/pages/404";
+import BookInfoStep from "./BookInfoStep";
+import QuoteStep from "./QuoteStep";
+import RatingStep from "./RatingStep";
+import ReviewStep from "./ReviewStep";
+import VisibilityStep from "./VisibilityStep";
 
 // 각 단계에 대한 컴포넌트를 렌더링 하기 위한 함수 입니다.
 export const renderStepComponent = (step: number) => {
