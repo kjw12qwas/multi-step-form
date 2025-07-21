@@ -10,7 +10,7 @@ interface TextInputProps {
   error?: string;
   required?: boolean;
   disabled?: boolean;
-  type?: "text" | "number";
+  type?: "text" | "number" | "date";
   name?: string;
   id?: string;
 }
