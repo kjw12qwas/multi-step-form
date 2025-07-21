@@ -1,5 +1,5 @@
 import { QuoteInfo } from "@/types/form/quote";
-import { ValidationError } from "@/types/validationError";
+import { ValidationError } from "@/types/validation";
 
 export const validateQuoteInfo = (quoteInfo: QuoteInfo, totalPages: number): ValidationError[] => {
   const errors: ValidationError[] = [];

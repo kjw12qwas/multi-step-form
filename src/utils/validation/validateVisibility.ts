@@ -1,5 +1,5 @@
 import { VisibilityInfo } from "@/types/form/visibility";
-import { ValidationError } from "@/types/validationError";
+import { ValidationError } from "@/types/validation";
 
 export const validateVisibilityInfo = (visibilityInfo: VisibilityInfo): ValidationError[] => {
   const errors: ValidationError[] = [];

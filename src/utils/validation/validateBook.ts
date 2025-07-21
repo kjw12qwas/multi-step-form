@@ -1,6 +1,6 @@
 import { ReadingStatus } from "@/constants/readingStatus";
 import { BookInfo } from "@/types/form/book";
-import { ValidationError } from "@/types/validationError";
+import { ValidationError } from "@/types/validation";
 
 // 도서 정보 유효성 검사
 export const validateBookInfo = (bookInfo: BookInfo): ValidationError[] => {

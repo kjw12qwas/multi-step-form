@@ -1,5 +1,5 @@
 import { RatingInfo } from "@/types/form/rating";
-import { ValidationError } from "@/types/validationError";
+import { ValidationError } from "@/types/validation";
 
 // 별점 정보 유효성 검사
 export const validateRatingInfo = (ratingInfo: RatingInfo): ValidationError[] => {
