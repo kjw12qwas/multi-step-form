@@ -6,22 +6,22 @@ export const FormContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  min-height: 100vh;
+  padding: ${theme.spacing.xl};
+  gap: ${theme.spacing.xl};
 `;
 
-export const FormButtonContainer = styled.div`
+export const FormContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: ${theme.spacing.sm};
+  max-width: 600px;
+  width: 100%;
+`;
+
+export const ButtonContainer = styled.div`
   display: flex;
   gap: ${theme.spacing.md};
-`;
-
-export const FormConfirmButton = styled.button`
-  padding: ${theme.spacing.md} ${theme.spacing.xl};
-  background-color: ${theme.colors.primary[600]};
-  color: white;
-  border: none;
-  border-radius: ${theme.borderRadius.md};
-  font-size: ${theme.typography.fontSizes.md};
-  font-weight: ${theme.typography.fontWeights.medium};
-  cursor: pointer;
-  transition: background-color 0.2s ease;
+  margin-top: ${theme.spacing.lg};
 `;

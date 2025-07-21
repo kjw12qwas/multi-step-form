@@ -48,6 +48,30 @@ export const theme = {
       800: '#166534',
       900: '#14532d',
     },
+    warning: {
+      50: '#fffbeb',
+      100: '#fef3c7',
+      200: '#fde68a',
+      300: '#fcd34d',
+      400: '#fbbf24',
+      500: '#f59e0b',
+      600: '#d97706',
+      700: '#b45309',
+      800: '#92400e',
+      900: '#78350f',
+    },
+    info: {
+      50: '#eff6ff',
+      100: '#dbeafe',
+      200: '#bfdbfe',
+      300: '#93c5fd',
+      400: '#60a5fa',
+      500: '#3b82f6',
+      600: '#2563eb',
+      700: '#1d4ed8',
+      800: '#1e40af',
+      900: '#1e3a8a',
+    },
   },
   spacing: {
     xs: '0.25rem',
@@ -56,12 +80,17 @@ export const theme = {
     lg: '1rem',
     xl: '1.5rem',
     '2xl': '2rem',
+    '3xl': '3rem',
+    '4xl': '4rem',
   },
   borderRadius: {
+    none: '0',
     sm: '4px',
     md: '6px',
     lg: '8px',
     xl: '12px',
+    '2xl': '16px',
+    full: '9999px',
   },
   typography: {
     fontSizes: {
@@ -70,12 +99,170 @@ export const theme = {
       md: '1rem',
       lg: '1.125rem',
       xl: '1.25rem',
+      '2xl': '1.5rem',
+      '3xl': '1.875rem',
+      '4xl': '2.25rem',
     },
     fontWeights: {
+      thin: 100,
+      light: 300,
       normal: 400,
       medium: 500,
       semibold: 600,
       bold: 700,
+      extrabold: 800,
+      black: 900,
+    },
+    lineHeights: {
+      none: 1,
+      tight: 1.25,
+      snug: 1.375,
+      normal: 1.5,
+      relaxed: 1.625,
+      loose: 2,
+    },
+    letterSpacing: {
+      tighter: '-0.05em',
+      tight: '-0.025em',
+      normal: '0em',
+      wide: '0.025em',
+      wider: '0.05em',
+      widest: '0.1em',
+    },
+  },
+  shadows: {
+    sm: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
+    md: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+    lg: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+    xl: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+    '2xl': '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
+    inner: 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.06)',
+    none: 'none',
+  },
+  transitions: {
+    none: 'none',
+    all: 'all 150ms cubic-bezier(0.4, 0, 0.2, 1)',
+    colors: 'color 150ms cubic-bezier(0.4, 0, 0.2, 1), background-color 150ms cubic-bezier(0.4, 0, 0.2, 1), border-color 150ms cubic-bezier(0.4, 0, 0.2, 1), text-decoration-color 150ms cubic-bezier(0.4, 0, 0.2, 1), fill 150ms cubic-bezier(0.4, 0, 0.2, 1), stroke 150ms cubic-bezier(0.4, 0, 0.2, 1)',
+    opacity: 'opacity 150ms cubic-bezier(0.4, 0, 0.2, 1)',
+    shadow: 'box-shadow 150ms cubic-bezier(0.4, 0, 0.2, 1)',
+    transform: 'transform 150ms cubic-bezier(0.4, 0, 0.2, 1)',
+  },
+  zIndex: {
+    0: 0,
+    10: 10,
+    20: 20,
+    30: 30,
+    40: 40,
+    50: 50,
+    auto: 'auto',
+    dropdown: 1000,
+    sticky: 1020,
+    fixed: 1030,
+    modalBackdrop: 1040,
+    modal: 1050,
+    popover: 1060,
+    tooltip: 1070,
+  },
+  breakpoints: {
+    xs: '0px',
+    sm: '640px',
+    md: '768px',
+    lg: '1024px',
+    xl: '1280px',
+    '2xl': '1536px',
+  },
+  utils: {
+    // 텍스트 스타일 유틸리티
+    text: {
+      caption: `
+        font-size: 0.875rem;
+        color: #6b7280;
+        line-height: 1.5;
+      `,
+      label: `
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: #374151;
+        line-height: 1.4;
+      `,
+      body: `
+        font-size: 1rem;
+        color: #111827;
+        line-height: 1.5;
+      `,
+      heading: `
+        font-weight: 600;
+        line-height: 1.25;
+        color: #111827;
+      `,
+    },
+    // 배경 스타일 유틸리티
+    background: {
+      primary: `
+        background-color: #0ea5e9;
+        color: white;
+      `,
+      secondary: `
+        background-color: #f3f4f6;
+        color: #374151;
+      `,
+      success: `
+        background-color: #dcfce7;
+        color: #15803d;
+      `,
+      warning: `
+        background-color: #fef3c7;
+        color: #d97706;
+      `,
+      error: `
+        background-color: #fee2e2;
+        color: #b91c1c;
+      `,
+    },
+    // 레이아웃 유틸리티
+    layout: {
+      card: `
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        padding: 1.5rem;
+      `,
+      container: `
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1rem;
+      `,
+      flexCenter: `
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      `,
+      flexBetween: `
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      `,
+    },
+    // 인터랙션 유틸리티
+    interaction: {
+      button: `
+        cursor: pointer;
+        transition: all 0.2s ease;
+        user-select: none;
+        &:hover {
+          transform: translateY(-1px);
+        }
+        &:active {
+          transform: translateY(0);
+        }
+      `,
+      link: `
+        cursor: pointer;
+        transition: color 0.2s ease;
+        &:hover {
+          text-decoration: underline;
+        }
+      `,
     },
   },
 } as const;

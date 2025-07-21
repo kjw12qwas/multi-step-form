@@ -31,6 +31,7 @@ export const FormCard = styled.div`
   cursor: pointer;
   transition: all 0.2s ease;
   min-height: 200px;
+  gap: ${theme.spacing.md};
 
   &:hover {
     border-color: ${theme.colors.primary[400]};
@@ -40,41 +41,5 @@ export const FormCard = styled.div`
 
   &:active {
     transform: translateY(0);
-  }
-`;
-
-export const PageTitle = styled.h1`
-  font-size: ${theme.typography.fontSizes.xl};
-  font-weight: ${theme.typography.fontWeights.bold};
-  color: ${theme.colors.gray[800]};
-  margin: 0 0 ${theme.spacing.xl} 0;
-  text-align: center;
-`;
-
-export const CardTitle = styled.h2`
-  font-size: ${theme.typography.fontSizes.lg};
-  font-weight: ${theme.typography.fontWeights.semibold};
-  color: ${theme.colors.gray[700]};
-  margin: 0 0 ${theme.spacing.md} 0;
-  text-align: center;
-`;
-
-export const FormButton = styled.button`
-  padding: ${theme.spacing.md} ${theme.spacing.xl};
-  background-color: ${theme.colors.primary[600]};
-  color: white;
-  border: none;
-  border-radius: ${theme.borderRadius.md};
-  font-size: ${theme.typography.fontSizes.md};
-  font-weight: ${theme.typography.fontWeights.medium};
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-
-  &:hover {
-    background-color: ${theme.colors.primary[700]};
-  }
-
-  &:active {
-    background-color: ${theme.colors.primary[800]};
   }
 `; 
