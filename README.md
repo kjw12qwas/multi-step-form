@@ -61,3 +61,8 @@
 yarn install
 yarn dev
 ```
+
+## etc
+
+- cursor ai
+- chat gpt 
