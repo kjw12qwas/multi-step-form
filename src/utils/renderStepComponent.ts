@@ -1,9 +1,9 @@
 import NotFound from "@/pages/404";
-import BookInfoStep from "./BookInfoStep";
-import QuoteStep from "./QuoteStep";
-import RatingStep from "./RatingStep";
-import ReviewStep from "./ReviewStep";
-import VisibilityStep from "./VisibilityStep";
+import BookInfoStep from "@/pages/forms/_components/book/BookInfoStep";
+import QuoteStep from "@/pages/forms/_components/QuoteStep";
+import RatingStep from "@/pages/forms/_components/RatingStep";
+import ReviewStep from "@/pages/forms/_components/ReviewStep";
+import VisibilityStep from "@/pages/forms/_components/VisibilityStep";
 
 // 각 단계에 대한 컴포넌트를 렌더링 하기 위한 함수 입니다.
 export const renderStepComponent = (step: number) => {
@@ -21,4 +21,4 @@ export const renderStepComponent = (step: number) => {
     default:
       return NotFound;
   }
-};
+}; 

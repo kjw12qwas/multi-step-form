@@ -1,27 +1,44 @@
-import {
-  FormButtonContainer,
-  FormConfirmButton,
-  FormContainer,
-} from "@/styles/formStyles";
+import { Button } from "@/components/button";
+import { Text } from "@/components/text";
 import { useStepNavigation } from "@/hooks/useStepNavigation";
+import {
+  FormContainer,
+  FormContent,
+  ButtonContainer,
+} from "@/styles/formStyles";
 
 export default function QuoteStep() {
   const { handleNext, handlePrev } = useStepNavigation();
 
   return (
     <FormContainer>
-      <h1 aria-label="Quote Step Title">Quote Step</h1>
-      <FormButtonContainer>
-        <FormConfirmButton
-          onClick={handlePrev}
-          aria-label="Previous Step Button"
-        >
-          이전
-        </FormConfirmButton>
-        <FormConfirmButton onClick={handleNext} aria-label="Next Step Button">
-          다음
-        </FormConfirmButton>
-      </FormButtonContainer>
+      <FormContent>
+        <Text variant="h1" color="primary">
+          인용구
+        </Text>
+
+        {/* 여기에 인용구 입력 필드들이 들어갈 예정 */}
+        <Text variant="body" color="muted" align="center">
+          책에서 인상 깊었던 구절을 입력해주세요
+        </Text>
+
+        <ButtonContainer>
+          <Button
+            variant="outline"
+            onClick={handlePrev}
+            aria-label="Previous Step Button"
+          >
+            이전
+          </Button>
+          <Button
+            variant="primary"
+            onClick={handleNext}
+            aria-label="Next Step Button"
+          >
+            다음
+          </Button>
+        </ButtonContainer>
+      </FormContent>
     </FormContainer>
   );
 }
