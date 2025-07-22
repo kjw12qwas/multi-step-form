@@ -6,3 +6,12 @@ export const bookFields = {
   startDate: "startDate",
   endDate: "endDate",
 };
+
+export const ratingFields = {
+  rating: "rating",
+  isRecommended: "isRecommended",
+};
+
+export const reviewFields = {
+  content: "reviewContent",
+};
