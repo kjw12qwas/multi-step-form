@@ -123,30 +123,6 @@ export const FormPreview: React.FC<FormPreviewProps> = ({ data }) => {
         {data.bookInfo.endDate && renderField("종료일", data.bookInfo.endDate)}
       </PreviewSection>
 
-      {/* 인용구 */}
-      <PreviewSection>
-        <SectionTitle>
-          <Text variant="h3" color="secondary">
-            인용구
-          </Text>
-        </SectionTitle>
-        {data.quoteInfo.quotes.length > 0 ? (
-          data.quoteInfo.quotes.map((quote, index) => (
-            <PreviewField key={quote.id}>
-              <FieldLabel>인용구 {index + 1}:</FieldLabel>
-              <div>
-                <div>{quote.content}</div>
-                {quote.pageNumber && (
-                  <PageNumber>페이지: {quote.pageNumber}</PageNumber>
-                )}
-              </div>
-            </PreviewField>
-          ))
-        ) : (
-          <EmptyValue>인용구가 없습니다</EmptyValue>
-        )}
-      </PreviewSection>
-
       {/* 별점 및 추천 */}
       <PreviewSection>
         <SectionTitle>
@@ -180,6 +156,30 @@ export const FormPreview: React.FC<FormPreviewProps> = ({ data }) => {
           </Text>
         </SectionTitle>
         {renderField("내용", data.reviewInfo.content)}
+      </PreviewSection>
+
+      {/* 인용구 */}
+      <PreviewSection>
+        <SectionTitle>
+          <Text variant="h3" color="secondary">
+            인용구
+          </Text>
+        </SectionTitle>
+        {data.quoteInfo.quotes.length > 0 ? (
+          data.quoteInfo.quotes.map((quote, index) => (
+            <PreviewField key={quote.id}>
+              <FieldLabel>인용구 {index + 1}:</FieldLabel>
+              <div>
+                <div>{quote.content}</div>
+                {quote.pageNumber && (
+                  <PageNumber>페이지: {quote.pageNumber}</PageNumber>
+                )}
+              </div>
+            </PreviewField>
+          ))
+        ) : (
+          <EmptyValue>인용구가 없습니다</EmptyValue>
+        )}
       </PreviewSection>
 
       {/* 공개 설정 */}
