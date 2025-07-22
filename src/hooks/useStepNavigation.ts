@@ -10,7 +10,7 @@ export const useStepNavigation = () => {
   const { step } = router.query;
 
   const handleNext = () => {
-    if (step && Number(step) > MIN_STEP && Number(step) < MAX_STEP) {
+    if (step && Number(step) >= MIN_STEP && Number(step) < MAX_STEP) {
       router.push(`/forms/${Number(step) + 1}`);
     } else {
       router.push(`/forms/${DEFAULT_STEP}`);

@@ -11,11 +11,11 @@ export const renderStepComponent = (step: number) => {
     case 1:
       return BookInfoStep;
     case 2:
-      return QuoteStep;
-    case 3:
       return RatingStep;
-    case 4:
+    case 3:
       return ReviewStep;
+    case 4:
+      return QuoteStep;
     case 5:
       return VisibilityStep;
     default:

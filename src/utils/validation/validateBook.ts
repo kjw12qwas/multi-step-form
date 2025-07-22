@@ -14,6 +14,14 @@ export const validateBookInfo = (bookInfo: BookInfo): ValidationError[] => {
   // 출판일 검사
   if (!bookInfo.publishedDate) {
     errors.push({ field: 'publishedDate', message: '출판일을 선택해주세요.' });
+  } else {
+    const publishedDate = new Date(bookInfo.publishedDate);
+    publishedDate.setHours(0, 0, 0, 0);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); 
+    if (publishedDate > today) {
+      errors.push({ field: 'publishedDate', message: '출판일은 오늘 날짜 이전이어야 합니다.' });
+    }
   }
 
   // 총 페이지 수 검사
@@ -48,6 +56,16 @@ export const validateBookInfo = (bookInfo: BookInfo): ValidationError[] => {
       }
       if (!bookInfo.endDate) {
         errors.push({ field: 'endDate', message: '종료일을 선택해주세요.' });
+      } else {
+        // 종료일이 오늘 날짜 이후인지 검사
+        const endDate = new Date(bookInfo.endDate);
+        endDate.setHours(0, 0, 0, 0);
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        
+        if (endDate > today) {
+          errors.push({ field: 'endDate', message: '종료일은 오늘 날짜 이전이어야 합니다.' });
+        }
       }
       break;
   }
