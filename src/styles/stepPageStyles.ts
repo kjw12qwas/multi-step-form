@@ -5,7 +5,7 @@ export const SplitLayout = styled.div`
   display: flex;
   height: 100vh;
   background-color: white;
-  overflow-y: auto;
+  overflow: hidden;
 `;
 
 export const FormSection = styled.div`
@@ -19,7 +19,10 @@ export const PreviewSection = styled.div`
   flex: 1;
   padding: 2rem;
   background-color: white;
-  min-height: 100%;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 `;
 
 export const LayoutHeader = styled.div`
