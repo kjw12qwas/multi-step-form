@@ -3,7 +3,6 @@
 import { useRouter } from "next/router";
 import { renderStepComponent } from "@/utils/renderStepComponent";
 import { useEffect, useState } from "react";
-import NotFound from "../../404";
 import { FormPreview } from "@/components/preview/FormPreview";
 import { useFormData } from "@/contexts/FormDataContext";
 import { Text } from "@/components/text";
@@ -18,14 +17,22 @@ import {
   SectionTitle,
   ProgressInfo,
 } from "@/styles/stepPageStyles";
+import { LoadingSpinner } from "@/components/loading";
 
 export default function StepPage() {
   const router = useRouter();
   const { step } = router.query;
   const [StepComponent, setStepComponent] =
     useState<React.ComponentType | null>(null);
-  const { previewData, isLoaded } = useFormData();
+  const { previewData, isLoaded, updateFormData } = useFormData();
   const [isMobile, setIsMobile] = useState(false);
+  const [isRouterReady, setIsRouterReady] = useState(false);
+
+  useEffect(() => {
+    if (router.isReady) {
+      setIsRouterReady(true);
+    }
+  }, [router.isReady]);
 
   useEffect(() => {
     const checkWindowSize = () => {
@@ -42,19 +49,21 @@ export default function StepPage() {
   }, []);
 
   useEffect(() => {
-    if (step) {
+    if (isRouterReady && step) {
       const numericStep = Number(step);
       if (!isNaN(numericStep) && numericStep >= 1 && numericStep <= 5) {
         const component = renderStepComponent(numericStep);
         setStepComponent(() => component);
+
+        updateFormData({ step: numericStep });
       } else {
         router.replace("/404");
       }
     }
-  }, [step, router]);
+  }, [step, router, updateFormData, isRouterReady]);
 
-  if (!StepComponent || !isLoaded) {
-    return <NotFound />;
+  if (!isRouterReady || !StepComponent || !isLoaded) {
+    return <LoadingSpinner />;
   }
 
   const currentStep = Number(step);

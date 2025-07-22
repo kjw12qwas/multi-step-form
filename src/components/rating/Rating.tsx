@@ -7,11 +7,10 @@ interface RatingProps {
   value: number;
   onChange: (value: number) => void;
   max?: number;
+  step?: number;
   error?: string;
   required?: boolean;
   disabled?: boolean;
-  name?: string;
-  id?: string;
 }
 
 const InputContainer = styled.div`
@@ -30,37 +29,34 @@ const Label = styled.label`
 
 const RatingContainer = styled.div`
   display: flex;
-  align-items: center;
+  flex-direction: column;
   gap: ${theme.spacing.sm};
 `;
 
-const StarButton = styled.button<{ filled: boolean; disabled: boolean }>`
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
-  color: ${(props) =>
-    props.filled ? theme.colors.primary[500] : theme.colors.gray[300]};
-  transition: color 0.2s ease;
-  padding: 0;
-  line-height: 1;
+const SliderContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: ${theme.spacing.md};
+`;
 
-  &:hover {
-    color: ${(props) =>
-      props.disabled ? theme.colors.gray[300] : theme.colors.primary[400]};
-  }
+const RangeSlider = styled.input`
+  flex: 1;
+  height: 6px;
+  border-radius: 3px;
+  background: ${theme.colors.gray[200]};
+  outline: none;
 
-  &:focus {
-    outline: none;
-    color: ${(props) =>
-      props.filled ? theme.colors.primary[600] : theme.colors.primary[400]};
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
   }
 `;
 
 const RatingText = styled.span`
   font-size: ${theme.typography.fontSizes.sm};
   color: ${theme.colors.gray[600]};
-  margin-left: ${theme.spacing.sm};
+  min-width: 80px;
+  text-align: center;
 `;
 
 const ErrorMessage = styled.span`
@@ -81,21 +77,22 @@ export const Rating: React.FC<RatingProps> = ({
   value,
   onChange,
   max = 5,
+  step = 0.5,
   error,
   required = false,
   disabled = false,
 }) => {
-  const handleStarClick = (starValue: number) => {
+  const handleSliderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (!disabled) {
-      onChange(starValue);
+      const newValue = parseFloat(event.target.value);
+      onChange(newValue);
     }
   };
 
-  const handleKeyDown = (event: React.KeyboardEvent, starValue: number) => {
-    if (event.key === "Enter" || event.key === " ") {
-      event.preventDefault();
-      handleStarClick(starValue);
-    }
+  const getRatingLabel = (rating: number): string => {
+    if (rating === 0) return "선택해주세요";
+    const index = Math.ceil(rating) - 1;
+    return `${rating}점 - ${ratingLabels[index] || "매우 좋음"}`;
   };
 
   return (
@@ -107,30 +104,19 @@ export const Rating: React.FC<RatingProps> = ({
         </Label>
       )}
       <RatingContainer>
-        {Array.from({ length: max }, (_, index) => {
-          const starValue = index + 1;
-          const filled = starValue <= value;
-
-          return (
-            <StarButton
-              key={starValue}
-              type="button"
-              filled={filled}
-              disabled={disabled}
-              onClick={() => handleStarClick(starValue)}
-              onKeyDown={(e) => handleKeyDown(e, starValue)}
-              aria-label={`${starValue}점 ${filled ? "선택됨" : "선택 안됨"}`}
-              tabIndex={disabled ? -1 : 0}
-            >
-              ★
-            </StarButton>
-          );
-        })}
-        <RatingText>
-          {value > 0
-            ? `${value}점 - ${ratingLabels[value - 1]}`
-            : "선택해주세요"}
-        </RatingText>
+        <SliderContainer>
+          <RangeSlider
+            type="range"
+            min="0"
+            max={max}
+            step={step}
+            value={value}
+            onChange={handleSliderChange}
+            disabled={disabled}
+            aria-label={`별점 선택: ${value}점`}
+          />
+          <RatingText>{getRatingLabel(value)}</RatingText>
+        </SliderContainer>
       </RatingContainer>
       {error && <ErrorMessage>{error}</ErrorMessage>}
     </InputContainer>

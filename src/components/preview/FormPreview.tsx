@@ -29,27 +29,8 @@ const PreviewSection = styled.div`
   }
 `;
 
-const SectionTitle = styled.div`
-  margin-bottom: ${theme.spacing.md};
-`;
-
 const PreviewField = styled.div`
   margin-bottom: ${theme.spacing.sm};
-`;
-
-const FieldLabel = styled.span`
-  font-weight: ${theme.typography.fontWeights.medium};
-  color: ${theme.colors.gray[700]};
-  margin-right: ${theme.spacing.sm};
-`;
-
-const FieldValue = styled.span`
-  color: ${theme.colors.gray[900]};
-`;
-
-const EmptyValue = styled.span`
-  color: ${theme.colors.gray[400]};
-  font-style: italic;
 `;
 
 const RatingDisplay = styled.div`
@@ -63,57 +44,76 @@ const Star = styled.span<{ filled: boolean }>`
   font-size: 1.2rem;
 `;
 
-const PageNumber = styled.div`
-  font-size: ${theme.typography.fontSizes.sm};
-  color: ${theme.colors.gray[500]};
-  margin-top: ${theme.spacing.xs};
-`;
-
 export const FormPreview: React.FC<FormPreviewProps> = ({ data }) => {
   const renderField = (label: string, value: string | number | boolean) => {
     const displayValue =
       value === "" || value === 0 ? (
-        <EmptyValue>입력되지 않음</EmptyValue>
+        <Text variant="body" color="muted" style={{ fontStyle: "italic" }}>
+          입력되지 않음
+        </Text>
       ) : (
-        <FieldValue>{String(value)}</FieldValue>
+        <Text variant="body" color="primary" style={{ whiteSpace: "pre-wrap" }}>
+          {String(value)}
+        </Text>
       );
 
     return (
       <PreviewField>
-        <FieldLabel>{label}:</FieldLabel>
+        <Text
+          variant="body"
+          color="secondary"
+          style={{ marginRight: theme.spacing.sm, display: "inline" }}
+        >
+          {label}:
+        </Text>
         {displayValue}
       </PreviewField>
     );
   };
 
   const renderRating = (rating: number) => {
+    const fullStars = Math.floor(rating);
+    const hasHalfStar = rating % 1 !== 0;
+
     return (
       <RatingDisplay>
-        {[1, 2, 3, 4, 5].map((star) => (
-          <Star key={star} filled={star <= rating}>
-            ★
-          </Star>
-        ))}
-        <span>({rating}/5)</span>
+        {[1, 2, 3, 4, 5].map((star) => {
+          let starContent = "★";
+          let isFilled = star <= fullStars;
+
+          if (hasHalfStar && star === fullStars + 1) {
+            starContent = "☆";
+            isFilled = true;
+          }
+
+          return (
+            <Star key={star} filled={isFilled}>
+              {starContent}
+            </Star>
+          );
+        })}
+        <Text variant="body" color="muted">
+          ({rating}/5)
+        </Text>
       </RatingDisplay>
     );
   };
 
   return (
     <PreviewContainer>
-      <SectionTitle>
+      <div style={{ marginBottom: theme.spacing.md }}>
         <Text variant="h2" color="primary">
           미리보기
         </Text>
-      </SectionTitle>
+      </div>
 
       {/* 도서 정보 */}
       <PreviewSection>
-        <SectionTitle>
+        <div style={{ marginBottom: theme.spacing.md }}>
           <Text variant="h3" color="secondary">
             도서 정보
           </Text>
-        </SectionTitle>
+        </div>
         {renderField("제목", data.bookInfo.title)}
         {renderField("출판일", data.bookInfo.publishedDate)}
         {renderField("총 페이지", data.bookInfo.totalPages.toString())}
@@ -125,21 +125,35 @@ export const FormPreview: React.FC<FormPreviewProps> = ({ data }) => {
 
       {/* 별점 및 추천 */}
       <PreviewSection>
-        <SectionTitle>
+        <div style={{ marginBottom: theme.spacing.md }}>
           <Text variant="h3" color="secondary">
             별점 및 추천
           </Text>
-        </SectionTitle>
+        </div>
         <PreviewField>
-          <FieldLabel>별점:</FieldLabel>
+          <Text
+            variant="body"
+            color="secondary"
+            style={{ marginRight: theme.spacing.sm, display: "inline" }}
+          >
+            별점:
+          </Text>
           {data.ratingInfo.rating > 0 ? (
             renderRating(data.ratingInfo.rating)
           ) : (
-            <EmptyValue>평가되지 않음</EmptyValue>
+            <Text variant="body" color="muted" style={{ fontStyle: "italic" }}>
+              평가되지 않음
+            </Text>
           )}
         </PreviewField>
         <PreviewField>
-          <FieldLabel>추천:</FieldLabel>
+          <Text
+            variant="body"
+            color="secondary"
+            style={{ marginRight: theme.spacing.sm, display: "inline" }}
+          >
+            추천:
+          </Text>
           {data.ratingInfo.isRecommended ? (
             <Badge variant="success">추천함</Badge>
           ) : (
@@ -150,47 +164,68 @@ export const FormPreview: React.FC<FormPreviewProps> = ({ data }) => {
 
       {/* 독후감 */}
       <PreviewSection>
-        <SectionTitle>
+        <div style={{ marginBottom: theme.spacing.md }}>
           <Text variant="h3" color="secondary">
             독후감
           </Text>
-        </SectionTitle>
+        </div>
         {renderField("내용", data.reviewInfo.content)}
       </PreviewSection>
 
       {/* 인용구 */}
       <PreviewSection>
-        <SectionTitle>
+        <div style={{ marginBottom: theme.spacing.md }}>
           <Text variant="h3" color="secondary">
             인용구
           </Text>
-        </SectionTitle>
+        </div>
         {data.quoteInfo.quotes.length > 0 ? (
           data.quoteInfo.quotes.map((quote, index) => (
             <PreviewField key={quote.id}>
-              <FieldLabel>인용구 {index + 1}:</FieldLabel>
+              <Text
+                variant="body"
+                color="secondary"
+                style={{ marginRight: theme.spacing.sm, display: "inline" }}
+              >
+                인용구 {index + 1}:
+              </Text>
               <div>
                 <div>{quote.content}</div>
                 {quote.pageNumber && (
-                  <PageNumber>페이지: {quote.pageNumber}</PageNumber>
+                  <Text
+                    variant="body"
+                    size="sm"
+                    color="muted"
+                    style={{ marginTop: theme.spacing.xs }}
+                  >
+                    페이지: {quote.pageNumber}
+                  </Text>
                 )}
               </div>
             </PreviewField>
           ))
         ) : (
-          <EmptyValue>인용구가 없습니다</EmptyValue>
+          <Text variant="body" color="muted" style={{ fontStyle: "italic" }}>
+            인용구가 없습니다
+          </Text>
         )}
       </PreviewSection>
 
       {/* 공개 설정 */}
       <PreviewSection>
-        <SectionTitle>
+        <div style={{ marginBottom: theme.spacing.md }}>
           <Text variant="h3" color="secondary">
             공개 설정
           </Text>
-        </SectionTitle>
+        </div>
         <PreviewField>
-          <FieldLabel>공개 여부:</FieldLabel>
+          <Text
+            variant="body"
+            color="secondary"
+            style={{ marginRight: theme.spacing.sm, display: "inline" }}
+          >
+            공개 여부:
+          </Text>
           {data.visibilityInfo.isPublic ? (
             <Badge variant="info">공개</Badge>
           ) : (

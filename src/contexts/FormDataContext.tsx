@@ -134,16 +134,18 @@ export const FormDataProvider: React.FC<{ children: ReactNode }> = ({
         errors.push(...validateBookInfo(formData.bookInfo));
         break;
       case 2:
-        errors.push(
-          ...validateQuoteInfo(formData.quoteInfo, formData.bookInfo.totalPages)
-        );
+        errors.push(...validateRatingInfo(formData.ratingInfo));
         break;
       case 3:
-        errors.push(...validateRatingInfo(formData.ratingInfo));
+        const reviewErrors = validateReviewInfo(
+          formData.reviewInfo,
+          formData.ratingInfo.rating
+        );
+        errors.push(...reviewErrors);
         break;
       case 4:
         errors.push(
-          ...validateReviewInfo(formData.reviewInfo, formData.ratingInfo.rating)
+          ...validateQuoteInfo(formData.quoteInfo, formData.bookInfo.totalPages)
         );
         break;
       case 5:
@@ -179,18 +181,18 @@ export const FormDataProvider: React.FC<{ children: ReactNode }> = ({
           allErrors = validateBookInfo(formData.bookInfo);
           break;
         case 2:
-          allErrors = validateQuoteInfo(
-            formData.quoteInfo,
-            formData.bookInfo.totalPages
-          );
-          break;
-        case 3:
           allErrors = validateRatingInfo(formData.ratingInfo);
           break;
-        case 4:
+        case 3:
           allErrors = validateReviewInfo(
             formData.reviewInfo,
             formData.ratingInfo.rating
+          );
+          break;
+        case 4:
+          allErrors = validateQuoteInfo(
+            formData.quoteInfo,
+            formData.bookInfo.totalPages
           );
           break;
         case 5:
