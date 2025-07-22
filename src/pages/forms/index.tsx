@@ -13,9 +13,9 @@ import { LOCAL_STORAGE_KEY } from "@/constants/localStorage";
 
 const STEP_DESCRIPTIONS = {
   1: "도서 정보 입력",
-  2: "인용구 입력",
-  3: "별점 평가",
-  4: "독후감 작성",
+  2: "별점 평가",
+  3: "독후감 작성",
+  4: "인용구 입력",
   5: "공개 설정",
 } as const;
 
